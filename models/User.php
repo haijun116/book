@@ -27,6 +27,15 @@ class User extends \yii\db\ActiveRecord
         return md5($password . md5($this->login_salt));
     }
 
+    //
+    public function setSalt($length=16){
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKLMNOPQRSTUVWXYZ0123456789@#!$%';
+        $salt = '';
+        for ($i = 0; $i< $length;$i++){
+            $salt .= $chars[mt_rand(0,strlen($chars)-1)];
+        }
+        return $salt;
+    }
     //校验密码
 
     public function verifyPassword($password){

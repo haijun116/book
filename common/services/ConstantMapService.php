@@ -17,4 +17,7 @@ class ConstantMapService
         0 => '已删除'
     ];
 
+    public static $default_avatar = 'default_avatar';
+
+    public static $default_password = '******';
 }

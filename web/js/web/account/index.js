@@ -17,21 +17,32 @@ var account_index_ops = {
         });
     },
     ops: function (act, uid) {
-        $.ajax({
-            url: common_ops.buildWebUrl('account/ops'),
-            type: 'post',
-            data: {
-                act: act,
-                uid: uid
+        callback = {
+            'ok': function () {
+                $.ajax({
+                    url: common_ops.buildWebUrl('account/ops'),
+                    type: 'post',
+                    data: {
+                        act: act,
+                        uid: uid
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        callback = null;
+                        if (res.code = 200) {
+                            callback = function () {
+                                window.location.href = window.location.href;
+                            }
+                        }
+                        common_ops.alert(res.msg, callback);
+                    }
+                });
             },
-            dataType: 'json',
-            success: function (res) {
-                alert(res.msg);
-                if(res.code = 200){
-                     window.location.href = window.location.href;
-                }
+            'cancel': function () {
+
             }
-        })
+        }
+        common_ops.confirm((act == 'remove') ? '您确认删除吗?' : '您确认恢复吗', callback);
     }
 }
 $(document).ready(function () {

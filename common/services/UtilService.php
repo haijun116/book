@@ -9,15 +9,27 @@
 namespace app\common\services;
 
 
+use yii\helpers\Html;
+
 class UtilService
 {
 
-    public static function getIP(){
+    public static function getIP()
+    {
 
-        if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
-        return $_SERVER['REMOTE_ADDR']? $_SERVER['REMOTE_ADDR']: '';
+        return $_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : '';
     }
 
+    public static function encode($display)
+    {
+        return Html::encode($display);
+    }
+
+    public static function getRootPath()
+    {
+        return dirname(\Yii::$app->vendorPath);
+    }
 }

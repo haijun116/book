@@ -5,18 +5,20 @@ upload = {
     },
     success:function (image_key) {
         //common_ops.alert(msg);
-        var html = '<span class="pic-each"><img src="'+image_key+'"> <span class="fa fa-times-circle del del_image"data="'+image_key+'"><i></i></span>';
+        var html = '<span class="pic-each"><img src="'+common_ops.buildPicUrl('brand',image_key)+'"> <span class="fa fa-times-circle del del_image"data="'+image_key+'"><i></i></span>';
         if($('.upload_pic_wrap .pic-each').size()>0){
             $('.upload_pic_wrap .pic-each').html(html);
         }else {
 
             $('.upload_pic_wrap .pic-each').append('<span class="pic-each">'+html+'</span>');
         }
+        brand_set_ops.delete_img();
     }
 }
 var brand_set_ops ={
     init:function () {
         this.eventBind();
+        this.delete_img();
     },
     eventBind:function () {
         $('.save').click(function () {
@@ -80,6 +82,11 @@ var brand_set_ops ={
         });
         $('.upload_pic_wrap input[name=pic]').change(function () {
             $('.upload_pic_wrap ').submit();
+        })
+    },
+    delete_img:function () {
+        $('.upload_pic_wrap .del_image').unbind().click(function () {
+            $(this).parent().remove();
         })
     }
 }

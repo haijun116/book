@@ -22,7 +22,7 @@
             <dd><?=$info ? UtilService::encode($info['name']): '';?></dd>
             <dt>品牌Logo</dt>
             <dd>
-                <img class="img-circle circle-border" src="/uploads/brand/20170301/a8887738ab1bfd71765dd063fee4ddaa.jpg"
+                <img class="img-circle circle-border" src="<?=\app\common\services\UrlService::buildPicUrl('brand',$info['logo']);?>"
                      style="width: 100px;height: 100px;"/>
             </dd>
 

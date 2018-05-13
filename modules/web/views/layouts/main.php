@@ -1,5 +1,6 @@
 <?php
 \app\assets\WebAsset::register($this);
+$upload_config = Yii::$app->params['upload'];
 ?>
 <?php $this->beginPage(); ?>
     <!DOCTYPE html>
@@ -9,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>管理后台</title>
-        <?php $this->head();?>
+        <?php $this->head(); ?>
     </head>
     <body>
     <?php $this->beginBody(); ?>
@@ -119,6 +120,9 @@
             </div>
             <?= $content; ?>
         </div>
+    </div>
+    <div class="hidden_layout_warp hide">
+        <input type="hidden" name="upload_config" value='<?=json_encode($upload_config);?>'>
     </div>
     </body>
     <?php $this->endBody(); ?>

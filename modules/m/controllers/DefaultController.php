@@ -2,12 +2,14 @@
 
 namespace app\modules\m\controllers;
 
-use yii\web\Controller;
+use app\models\brand\BrandImages;
+use app\models\brand\BrandSetting;
+use app\modules\m\controllers\common\BaseController;
 
 /**
  * Default controller for the `m` module
  */
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     /**
      * Renders the index view for the module
@@ -15,7 +17,11 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'main';
-        return $this->render('index');
+        $info = BrandSetting::find()->one();
+        $images = BrandImages::find()->all();
+        return $this->render('index',[
+            'info' => $info,
+            'images'=>$images
+        ]);
     }
 }

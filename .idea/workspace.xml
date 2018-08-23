@@ -7088,8 +7088,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/m/views/user/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+            <state relative-caret-position="209">
+              <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
               <folding>
                 <element signature="e#6#42#0#PHP" expanded="true" />
               </folding>
@@ -7380,12 +7380,12 @@
       <workItem from="1533810705703" duration="15273000" />
       <workItem from="1534040282868" duration="6758000" />
       <workItem from="1534769721142" duration="368000" />
-      <workItem from="1535021808605" duration="6404000" />
+      <workItem from="1535021808605" duration="6924000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78859000" />
+    <option name="totallyTimeSpent" value="79379000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -7399,9 +7399,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="12" y="46" width="1440" height="797" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49787235" visible="true" weight="0.23390558" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49787235" visible="true" weight="0.23390558" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49785408" weight="0.32848486" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50143063" side_tool="true" weight="0.32714286" />
@@ -7410,7 +7409,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49791667" weight="0.32780084" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" sideWeight="0.50212765" side_tool="true" weight="0.18669528" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4985694" weight="0.3260606" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4985694" visible="true" weight="0.3257143" />
       <window_info id="Favorites" order="2" sideWeight="0.50212765" side_tool="true" weight="0.18669528" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49861112" weight="0.30666667" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -7809,8 +7808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/m/views/user/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        <state relative-caret-position="209">
+          <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
           <folding>
             <element signature="e#6#42#0#PHP" expanded="true" />
           </folding>

@@ -7,7 +7,7 @@ use \app\common\services\UtilService;
     <p><?=UtilService::encode( $current_user['nickname'] );?></p>
 </div>
 <div class="fastway_list_box">
-    <ul class="fastway_list">
+    <ul class=git"fastway_list">
         <li><a href="<?=UrlService::buildMUrl("/product/cart");?>"><b class="wl_icon"></b><i class="right_icon"></i><span>购物车</span></a></li>
         <li><a href="<?=UrlService::buildMUrl("/user/order");?>"><b class="morder_icon"></b><i class="right_icon"></i><span>我的订单</span></a></li>
         <li><a href="<?=UrlService::buildMUrl("/user/fav");?>"><b class="fav_icon"></b><i class="right_icon"></i><span>我的收藏</span></a></li>

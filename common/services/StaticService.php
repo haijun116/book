@@ -18,7 +18,7 @@ class StaticService
 
     public static function includeAppCssStatic($path, $depend)
     {
-        self::includeAppCssStatic('css',$path,$depend);
+        self::includeAppStatic('css',$path,$depend);
     }
 
     protected static function includeAppStatic($type, $path, $depend)

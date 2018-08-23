@@ -10,6 +10,7 @@ namespace app\modules\weixin\controllers;
 
 
 use app\common\components\BaseWebController;
+use app\common\components\HttpClient;
 use app\common\services\UrlService;
 use app\common\services\weixin\RequestService;
 
@@ -37,8 +38,8 @@ class MenuController extends BaseWebController
         RequestService::setConfig($config['appid'], $config['token'], $config['sk']);
         $access_token = RequestService::getAccessToken();
         if ($access_token) {
-            $url = "menu/create?access_token={$access_token}";
-            $ret = RequestService::send($url, json_encode($menu, JSON_UNESCAPED_UNICODE), 'post');
+            $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$access_token}";
+            $ret = HttpClient::post($url, json_encode($menu, JSON_UNESCAPED_UNICODE));
             var_dump($ret);
         }
     }

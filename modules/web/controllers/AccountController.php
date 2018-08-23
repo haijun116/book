@@ -66,7 +66,7 @@ class AccountController extends BaseController
                 'info' => $info
             ]);
         }
-        $id = intval($this->post('id',0));
+        $id = intval($this->post('id', 0));
         $nickname = trim($this->post('nickname'));
         $mobile = trim($this->post('mobile'));
         $email = trim($this->post('email'));
@@ -100,8 +100,8 @@ class AccountController extends BaseController
         } else {
             //添加
             $model_user = new User();
-            $model_user->login_salt = $model_user->setSalt();
-            $model_user->create_time = $data_now;
+            $model_user->setSalt();
+            $model_user->created_time = $data_now;
         }
         $model_user->nickname = $nickname;
         $model_user->mobile = $mobile;
@@ -119,18 +119,18 @@ class AccountController extends BaseController
 
     public function actionInfo()
     {
-       if(\Yii::$app->request->isGet){
-            $id = intval($this->get('id',0));
-            if($id){
-                $info = User::find()->where(['uid'=> $id])->one();
+        if (\Yii::$app->request->isGet) {
+            $id = intval($this->get('id', 0));
+            if ($id) {
+                $info = User::find()->where(['uid' => $id])->one();
             }
-            $access_list  = AppAccessLog::find()->where(['uid'=>$id])
-                ->orderBy(['id'=>SORT_DESC])->limit(10)->all();
-           return $this->render('info',[
-               'info' =>$info,
-               'access_list'=>$access_list
-           ]);
-       }
+            $access_list = AppAccessLog::find()->where(['uid' => $id])
+                ->orderBy(['id' => SORT_DESC])->limit(10)->all();
+            return $this->render('info', [
+                'info' => $info,
+                'access_list' => $access_list
+            ]);
+        }
     }
 
     //操作方法

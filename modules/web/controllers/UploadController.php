@@ -26,6 +26,7 @@ class UploadController extends BaseController
     {
 
         $bucket = trim($this->post('bucket', ''));
+        $type = $this->post('type');
         $callback = "window.parent.upload";  //error,success 调用父类的error,success方法
         if (!$_FILES || !isset($_FILES['pic'])) {
             return "<script>{$callback}.error('请选择文件之后再提交');</script>";
@@ -37,12 +38,11 @@ class UploadController extends BaseController
         }
 
         //上传的图片的业务逻辑
-
         $res = UploadService::uploadByFile($file_name,$_FILES['pic']['tmp_name'],$bucket);
         if(!$res){
             return "<script>{$callback}.error('".UploadService::getLastErrorMsg()."');</script>";
         }
 
-        return "<script>{$callback}.success('{$res['path']}');</script>";
+        return "<script>{$callback}.success('{$res['path']}','$type');</script>";
     }
 }

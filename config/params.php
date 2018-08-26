@@ -5,14 +5,14 @@ return [
     'desc' => '图书商城描述',
     'adminEmail' => 'admin@example.com',
     'domain' => [
-//        'www' => 'http://book.cn/',
-//        'm' => 'http://book.cn/m',
-//        'web' => 'http://book.cn/web',
-//        'blog' => "http://blog.dr.test",
-        'www' => 'http://sky116.easy.echosite.cn/',
-        'm' => 'http://sky116.easy.echosite.cn/m',
-        'web' => 'http://sky116.easy.echosite.cn/web',
-        'blog' => "http://sky116.easy.echosite.cn/"
+        'www' => 'http://book.cn/',
+        'm' => 'http://book.cn/m',
+        'web' => 'http://book.cn/web',
+        'blog' => "http://blog.dr.test",
+//        'www' => 'http://sky116.easy.echosite.cn/',
+//        'm' => 'http://sky116.easy.echosite.cn/m',
+//        'web' => 'http://sky116.easy.echosite.cn/web',
+//        'blog' => "http://sky116.easy.echosite.cn/"
     ],
     'upload' => [
         'avatar' => '/uploads/avatar',

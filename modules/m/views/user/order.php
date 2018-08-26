@@ -1,7 +1,7 @@
 <?php
-
 use \app\common\services\UrlService;
-\app\common\services\StaticService::includeAppJsStatic('js/m/user/order.js',\app\assets\WebAsset::className());
+use \app\common\services\StaticService;
+StaticService::includeAppJsStatic( "/js/m/user/order.js",\app\assets\MAsset::className() );
 ?>
 <div class="page_title clearfix">
     <span>订单列表</span>
@@ -40,7 +40,7 @@ use \app\common\services\UrlService;
             </ul>
             <?php if( $_item['status'] == -8 ):?>
                 <div class="op_box border-top">
-                    <a style="display: inline-block;" class="button cancel" data="<?=$_item['id'];?>" href="<?=UrlService::buildNullUrl();?>">取消订单</a>
+                    <a style="display: inline-block;" class="button close" data="<?=$_item['id'];?>" href="<?=UrlService::buildNullUrl();?>">取消订单</a>
                     <a style="display: inline-block;" class="button"  href="<?=$_item["pay_url"];?>">微信支付</a>
                 </div>
             <?php elseif( $_item['status'] == 1 && $_item['express_status'] == -6):?>
@@ -56,7 +56,3 @@ use \app\common\services\UrlService;
         悲剧啦，连个订单都咩有了~~
     </div>
 <?php endif;?>
-
-
-
-

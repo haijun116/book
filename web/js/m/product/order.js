@@ -24,7 +24,8 @@ var product_order_ops = {
                 dataType: 'json',
                 data: {
                     product_items: data,
-                    address_id: address_id
+                    address_id: address_id,
+                    sc:$(".op_box input[name=sc]").val()
                 },
                 success: function (res) {
                     window.location.href = res.data.url;
@@ -35,4 +36,4 @@ var product_order_ops = {
 }
 $(document).ready(function () {
     product_order_ops.init();
-})
+});

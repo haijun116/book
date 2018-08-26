@@ -10,6 +10,7 @@ namespace app\modules\m\controllers;
 
 
 use app\common\services\ConstantMapService;
+use app\common\services\DataHelper;
 use app\common\services\PayOrderService;
 use app\common\services\UrlService;
 use app\common\services\UtilService;
@@ -108,6 +109,29 @@ class ProductController extends BaseController
     public function actionCart()
     {
 
+        if (\Yii::$app->request->isGet) {
+            $list = MemberCart::find()->where(['member_id' => $this->current_user['id']])
+                ->orderBy(['id' => SORT_DESC])->all();
+            $data = [];
+            if ($list) {
+                $book_mapping = DataHelper::getDicByRealateId($list, Book::className(), "book_id", "id", ['name', 'price', 'main_image', 'stock']);
+                foreach ($list as $item) {
+                    $tmp_book_info = $book_mapping[$item['book_id']];
+                    $data[] = [
+                        'id' => $item['id'],
+                        'quantity' => $item['quantity'],
+                        'book_id' => $item['book_id'],
+                        'book_price' => $tmp_book_info['price'],
+                        'book_stock' => $tmp_book_info['stock'],
+                        'book_name' => UtilService::encode($tmp_book_info['name']),
+                        'book_main_image' => UrlService::buildPicUrl("book", $tmp_book_info['main_image'])
+                    ];
+                }
+            }
+            return $this->render('cart', [
+                'list' => $data
+            ]);
+        }
         $act = trim($this->post("act", ""));
         $id = intval($this->post("id", 0));
         $book_id = intval($this->post("book_id", 0));
@@ -131,13 +155,13 @@ class ProductController extends BaseController
 
         if ($cart_info) {
             $model_cart = $cart_info;
-            $model_cart->quantity = $model_cart->quantity + $quantity;
         } else {
             $model_cart = new MemberCart();
             $model_cart->member_id = $this->current_user['id'];
-            $model_cart->quantity = $quantity;
+
             $model_cart->created_time = $date_now;
         }
+        $model_cart->quantity = $quantity;
         $model_cart->book_id = $book_id;
         $model_cart->updated_time = $date_now;
         $model_cart->save(0);
@@ -220,6 +244,8 @@ class ProductController extends BaseController
         if (\Yii::$app->request->isGet) {
             $book_id = $this->get('id', 0);
             $quantity = $this->get('quantity', 1);
+            $sc = $this->get('sc', 'product');
+            $total_pay_money =0;
             $product_list = [];
             if ($book_id) {
                 $book_info = Book::find()->where(['id' => $book_id])->one();
@@ -234,15 +260,31 @@ class ProductController extends BaseController
 
                     $total_pay_money = $book_info['price'] * $quantity;
                 }
-
-
+            }else{
+                //从购物车取得的商品信息
+                $cart_list = MemberCart::find()->where(['member_id'=>$this->current_user['id']])->all();
+                if($cart_list){
+                    $book_mapping = DataHelper::getDicByRealateId($cart_list,Book::className(),"book_id","id",[ 'name','price','main_image','stock' ]);
+                    foreach ($cart_list   as $item){
+                        $tmp_book_info = $book_mapping[ $item['book_id'] ];
+                        $product_list[] = [
+                            'id' => $item['book_id'],
+                            'name' => UtilService::encode( $tmp_book_info['name'] ),
+                            'quantity' => $item['quantity'],
+                            'price' => $tmp_book_info['price'],
+                            'main_image' => UrlService::buildPicUrl( "book",$tmp_book_info['main_image'] )
+                        ];
+                        $total_pay_money += $tmp_book_info['price'] * $item['quantity'];
+                    }
+                }
             }
             return $this->render('order', [
                 'product_list' => $product_list,
-                'total_pay_money' => $total_pay_money
+                'total_pay_money' => $total_pay_money,
+                'sc' => $sc
             ]);
         }
-
+        $sc = trim( $this->post("sc","") );
         $product_items = $this->post('product_items', []);
         $address_id = intval($this->post("address_id", 0));
 
@@ -283,12 +325,14 @@ class ProductController extends BaseController
             'express_address_id' => $address_id
         ];
 
-        $ret = PayOrderService::createPayOrder($this->current_user['id'],$items,$params);
+        $ret = PayOrderService::createPayOrder($this->current_user['id'], $items, $params);
 
-        if(!$ret){
-            return $this->renderJSON([],'提交失败，失败原因',PayOrderService::getLastErrorMsg(),-1);
+        if (!$ret) {
+            return $this->renderJSON([], '提交失败，失败原因', PayOrderService::getLastErrorMsg(), -1);
         }
-
-        return $this->renderJSON(['url'=>UrlService::buildMUrl("/pay/buy/?pay_order_id={$ret['id']}")],'下单成功，前去支付');
+        if($sc == 'cart'){
+            MemberCart::deleteAll(['member_id'=>$this->current_user['id']]);
+        }
+        return $this->renderJSON(['url' => UrlService::buildMUrl("/pay/buy/?pay_order_id={$ret['id']}")], '下单成功，前去支付');
     }
 }
